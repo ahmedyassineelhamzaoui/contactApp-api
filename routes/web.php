@@ -1,7 +1,8 @@
 <?php
+header('Access-Control-Allow-Origin: http://localhost:4200');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,10 +13,5 @@ use App\Http\Controllers\ContactController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[ContactController::class,'index'],);
-Route::controller(ContactController::class)->group(function(){
-  Route::get('/','index');
-});
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+

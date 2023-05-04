@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('Nom');
             $table->string('Prenom');
-            $table->Date('Date_naissance');
+            $table->string('Date_naissance');
             $table->string('Tel');
             $table->timestamps();
         });

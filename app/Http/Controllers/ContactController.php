@@ -20,4 +20,30 @@ class ContactController extends Controller
         ],404);
         
     }
+    public function createContact(Request $request)
+    {
+        $request->validate([
+            'Nom' => 'required|string|min:2',
+            'Prenom' => 'required|string|min:2',
+            'Date_naissance' => 'required',
+            'Tel' => 'required',
+          ]);
+        
+       $contact =  Contact::create([
+          'Nom' => $request->Nom,
+          'Prenom' => $request->Prenom,
+          'Date_naissance' => $request->Date_naissance,
+          'Tel' => $request->Tel,
+        ]);
+       if($contact){
+        return response()->json([
+            'message' => 'success',
+            'content' => 'contact created successfuly'
+        ],200);
+       }
+       return response()->json([
+        'message' => 'error',
+        'content' => 'something went wrong'
+       ]);
+    }
 }
