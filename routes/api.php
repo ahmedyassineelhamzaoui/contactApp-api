@@ -18,4 +18,5 @@ use App\Http\Controllers\ContactController;
 Route::controller(ContactController::class)->group(function(){
     Route::get('/','index');
     Route::post('/createContact','createContact');
+    Route::delete('/deleteContact','deleteContact');
 });

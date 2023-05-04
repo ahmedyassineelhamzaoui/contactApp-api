@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     public function index(){
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
+
         $contacts =  Contact::all('Nom','Prenom','Date_naissance','Tel');
         if(count($contacts)>0){
             return response()->json([
@@ -22,6 +26,7 @@ class ContactController extends Controller
     }
     public function createContact(Request $request)
     {
+       
         $request->validate([
             'Nom' => 'required|string|min:2',
             'Prenom' => 'required|string|min:2',
@@ -45,5 +50,15 @@ class ContactController extends Controller
         'message' => 'error',
         'content' => 'something went wrong'
        ]);
+    }
+    public function deleteContact(Request $request,Contact $contact)
+    {
+       $contact = Contact::find($request->id);
+       if($contact){
+        $contact->delete();
+        return response()->json([
+           'message' => 'contact deleted successfuly'
+        ]);
+       }
     }
 }
