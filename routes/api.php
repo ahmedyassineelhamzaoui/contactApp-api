@@ -19,4 +19,5 @@ Route::controller(ContactController::class)->group(function(){
     Route::get('/','index');
     Route::post('/createContact','createContact');
     Route::delete('/deleteContact','deleteContact');
+    Route::put('/updateContact','updateContact');
 });

@@ -51,14 +51,29 @@ class ContactController extends Controller
         'content' => 'something went wrong'
        ]);
     }
-    public function deleteContact(Request $request,Contact $contact)
+    public function updateContact(Request $request)
     {
        $contact = Contact::find($request->id);
        if($contact){
-        $contact->delete();
+        if($request->has('Nom')){
+            $contact->Nom = $request->Nom;
+        }
+        if($request->has('Prenom')){
+            $contact->Prenom = $request->Prenom;
+        }
+        if($request->has('Date_naissance')){
+            $contact->Date_naissance = $request->Date_naissance;
+        }
+        if($request->has('Tel')){
+            $contact->Tel = $request->Tel;
+        }
+        $contact->save();
         return response()->json([
-           'message' => 'contact deleted successfuly'
-        ]);
+            'message' => 'conatact updated successfuly'
+        ],200);
        }
+       return response()->json([
+        'message' => 'contact not found'
+       ],404);
     }
 }
