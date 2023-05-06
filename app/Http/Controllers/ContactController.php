@@ -69,11 +69,25 @@ class ContactController extends Controller
         }
         $contact->save();
         return response()->json([
-            'message' => 'conatact updated successfuly'
+            'message' => 'conatact updated successfuly',
+            'contact' => $contact       
         ],200);
        }
        return response()->json([
         'message' => 'contact not found'
        ],404);
+    }
+    public function deleteContact(Request $request){
+       $contact = Contact::find($request->id);
+       if($contact){
+        $contact->delete();
+        return response()->json([
+           'message' => 'contact deleted successfuly'
+        ],200);
+       }else{
+        return response()->json([
+            'message' => 'contact not found'
+         ],404);
+       }
     }
 }
